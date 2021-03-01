@@ -19,7 +19,3 @@ function merge(left, right) {
     }
     return sorted.concat(left, right);
 }
-
-var arr = [5, 4, 3, -5, 2, 8, 1, 10];
-let sorted = mergeSort(arr);
-console.log(sorted);

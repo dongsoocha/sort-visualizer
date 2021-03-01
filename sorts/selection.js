@@ -14,7 +14,3 @@ function selection(arr) {
     }
     return arr;
 }
-
-var arr = [5, 4, 3, -5, 2, 8, 1, 10];
-let sorted = selection(arr);
-console.log(sorted);

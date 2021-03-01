@@ -10,8 +10,3 @@ function insertion(arr) {
 
     return arr
 }
-
-
-var arr = [5, 4, 3, -5, 2, 8,1,10];
-let sorted = insertion(arr);
-console.log(sorted);
