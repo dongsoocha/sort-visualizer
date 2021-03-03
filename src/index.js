@@ -4,10 +4,11 @@ let length;
 var svg = d3
   .select("body")
   .append("svg")
-  .attr("height", "500")
+  .attr("height", "300")
   .attr("width", "400");
 
 let selected = [];
+let current;
 
 // BUTTONS
 document.getElementById("array-gen").addEventListener("click", function() {
@@ -24,7 +25,6 @@ document.getElementById("insertion").addEventListener("click", function () {
 });
 document.getElementById("merge").addEventListener("click", function () {
   mergeSort(renderArray);
-  console.log(renderArray);
 });
 document.getElementById("quick").addEventListener("click", function () {
   quickSort(renderArray);
@@ -52,16 +52,18 @@ function draw() {
     .data(renderArray)
     .enter()
     .append("rect")
-    .attr("fill", "#999999")
+    .attr("fill", function (d, i) {
+        return current === i ? 'red' : selected.includes(i) ? 'green' : '#777777';
+    })
     .attr("height", function (d, i) {
-        return d * 5;
+        return d * 3;
     })
     .attr("width", `${250 / length}`)
     .attr("x", function (d, i) {
         return 400 / length * i;
     })
     .attr("y", function (d, i) {
-        return 500 - (d * 5);
+        return 300 - (d * 3);
     });
 }
 
@@ -73,13 +75,14 @@ async function bubble(arr) {
   while (!sorted) {
     sorted = true;
     for (let i = 0; i < arr.length - 1; i++) {
-        
+        selected = [];
         if (arr[i + 1] < arr[i]) {
             // swap
+            selected.push(i + 1);
             [arr[i + 1], arr[i]] = [arr[i], arr[i + 1]];
             
             sorted = false;
-            await sleep(500/(10 * timeout));
+            await sleep(1000/(10 * timeout));
       }
     }
   }
@@ -91,11 +94,15 @@ async function bubble(arr) {
 async function insertion(arr) {
 let timeout = document.getElementById("sort-speed").value;
   for (let i = 1; i < arr.length; i++) {
+    selected = [];
     let j;
     let temp = arr[i]; // will mutate so need to assign to var
     for (j = i - 1; j >= 0 && arr[j] > temp; j--) {
+      current = null;
       arr[j + 1] = arr[j];
-      await sleep(500/(10 * timeout));
+      selected.push(j + 1);
+      current = j + 1;
+      await sleep(1000/(10 * timeout));
     }
     arr[j + 1] = temp;
   }
@@ -155,9 +162,11 @@ async function partition(arr, start, end) {
   const pivot = arr[end];
   let pivotIdx = start;
   for (let i = start; i < end; i++) {
+    selected = [];
     if (arr[i] < pivot) {
       // swap elements
       [arr[i], arr[pivotIdx]] = [arr[pivotIdx], arr[i]];
+      selected.push(i, pivotIdx);
       // move to next ele
       pivotIdx++;
       await sleep(1000 / (10 * timeout));
@@ -176,15 +185,15 @@ async function selection(arr) {
   let timeout = document.getElementById("sort-speed").value;
   for (let i = 0; i < arr.length - 1; i++) {
     let min = i;
-
+    
     for (let j = i + 1; j < arr.length; j++) {
-      if (arr[j] < arr[min]) {
-        min = j;
+        if (arr[j] < arr[min]) {
+            min = j;
+            await sleep(1000/(10 * timeout));
       }
     }
     if (min !== i) {
       [arr[i], arr[min]] = [arr[min], arr[i]];
-        await sleep(1000/(10 * timeout));
     }
   }
   return arr;
