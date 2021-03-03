@@ -56,14 +56,19 @@ table {
 
 
 
-
+.bar-background {
+    height: 40px;
+    background: rgba(88, 101, 113, .8);
+    display: flex;
+    justify-content: center;
+}
 .head-bar {
     display: flex;
     width: 100%;
     align-items: center;
     justify-content: space-between;
-    background: rgba(88, 101, 113, .8);
     height: 40px;
+    max-width: 850px;
 }
 .head-bar > p {
     margin-left: 20px;
@@ -126,6 +131,7 @@ body {
 
 }
 .size-control {
+    padding-top: 20px;
     display: flex;
     flex-direction: row;
     align-items: center;
