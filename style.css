@@ -105,20 +105,26 @@ body {
     display: flex;
     flex-direction: column;
     height: 100%;
-    width: 30vw;
-    border: solid 1px black;
+    width: 35vw;
+    border: none;
     border-radius: 3px;
     padding: 5px;
     background-color: rgb(119, 119, 119);
+    color: #cccccc;
+    font-family: SF Pro Text,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 12px;
+
 }
 .size-control {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 .speed-control {
     padding-top: 20px;
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 #array-gen{
     margin-top: 20px;

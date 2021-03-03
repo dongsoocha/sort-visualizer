@@ -11,6 +11,8 @@ var svg = d3
 let selected = [];
 let current;
 
+// add comparisons
+
 // BUTTONS
 document.getElementById("array-gen").addEventListener("click", function() {
     length = document.getElementById("array-length").value;
@@ -37,7 +39,9 @@ document.getElementById("selection").addEventListener("click", function () {
 function setup() {
     // prepare for draw
 
-    length = length || 20;
+    length = length || 30;
+    selected = [];
+    current = null;
     renderArray = [];
   for (let i = 0; i < length; i++) {
     renderArray.push(Math.floor(Math.random()*100));
