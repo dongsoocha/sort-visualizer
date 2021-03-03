@@ -2,10 +2,11 @@ let renderArray;
 // give for value of input array-length
 let length;
 var svg = d3
-  .select("body")
+  .select(".app")
   .append("svg")
-  .attr("height", "300")
-  .attr("width", "400");
+  .attr("height", "200")
+  .attr("width", "300")
+  .attr("fill", "#222222");
 
 let selected = [];
 let current;
@@ -56,14 +57,14 @@ function draw() {
         return current === i ? 'red' : selected.includes(i) ? 'green' : '#777777';
     })
     .attr("height", function (d, i) {
-        return d * 3;
+        return d * 2;
     })
-    .attr("width", `${250 / length}`)
+    .attr("width", `${150 / length}`)
     .attr("x", function (d, i) {
-        return 400 / length * i;
+        return 300 / length * (i) + 75 / length;
     })
     .attr("y", function (d, i) {
-        return 300 - (d * 3);
+        return 200 - (d * 2);
     });
 }
 
@@ -74,11 +75,12 @@ async function bubble(arr) {
   let timeout = document.getElementById("sort-speed").value
   while (!sorted) {
     sorted = true;
+    selected = [];
     for (let i = 0; i < arr.length - 1; i++) {
-        selected = [];
+        selected.push(i);
         if (arr[i + 1] < arr[i]) {
             // swap
-            selected.push(i + 1);
+            current = i + 1;
             [arr[i + 1], arr[i]] = [arr[i], arr[i + 1]];
             
             sorted = false;
@@ -166,7 +168,8 @@ async function partition(arr, start, end) {
     if (arr[i] < pivot) {
       // swap elements
       [arr[i], arr[pivotIdx]] = [arr[pivotIdx], arr[i]];
-      selected.push(i, pivotIdx);
+    //   selected = Array.from(new Array(pivotIdx - i + 1));
+        selected.push(i, pivotIdx);
       // move to next ele
       pivotIdx++;
       await sleep(1000 / (10 * timeout));
@@ -185,15 +188,19 @@ async function selection(arr) {
   let timeout = document.getElementById("sort-speed").value;
   for (let i = 0; i < arr.length - 1; i++) {
     let min = i;
-    
+    selected = [];
+    current = null;
     for (let j = i + 1; j < arr.length; j++) {
+        selected.push(j);
         if (arr[j] < arr[min]) {
             min = j;
+            current = j;
             await sleep(1000/(10 * timeout));
       }
     }
     if (min !== i) {
       [arr[i], arr[min]] = [arr[min], arr[i]];
+
     }
   }
   return arr;
