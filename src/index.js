@@ -143,6 +143,7 @@ async function merge(array, left, step) {
   selected = [];
   for (var i = left; i <= end; i++) {
     selected.push(i);
+    current = i;
     if (
       (array[leftMoving] <= array[rightMoving] || rightMoving > end) &&
       leftMoving < right
@@ -158,6 +159,7 @@ async function merge(array, left, step) {
 
   for (var j = left; j <= end; j++) {
     selected.push(j);
+    current = j;
     array[j] = temp[j];
     await sleep(1000 / (10 * timeout));
   }
@@ -182,13 +184,14 @@ async function partition(arr, start, end) {
   // last element as pivot
   const pivot = arr[end];
   let pivotIdx = start;
+  selected = [];
   for (let i = start; i < end; i++) {
-    selected = [];
     if (arr[i] < pivot) {
       // swap elements
       [arr[i], arr[pivotIdx]] = [arr[pivotIdx], arr[i]];
     //   selected = Array.from(new Array(pivotIdx - i + 1));
         selected.push(i, pivotIdx);
+        current = i;
       // move to next ele
       pivotIdx++;
       await sleep(1000 / (10 * timeout));
