@@ -27,7 +27,7 @@ document.getElementById("insertion").addEventListener("click", function () {
   insertion(renderArray);
 });
 document.getElementById("merge").addEventListener("click", function () {
-  mergeSort(renderArray);
+  mergeSort(renderArray, 0, length - 1);
 });
 document.getElementById("quick").addEventListener("click", function () {
   quickSort(renderArray);
@@ -63,7 +63,7 @@ function draw() {
     .attr("height", function (d, i) {
         return d * 2;
     })
-    .attr("width", `${150 / length}`)
+    .attr("width", `${200 / length}`)
     .attr("x", function (d, i) {
         return 400 / length * (i) + 100 / length;
     })
@@ -116,39 +116,54 @@ let timeout = document.getElementById("sort-speed").value;
   return arr;
 }
 
-// merge
+// merge 
+// needed bottom up iterative implementation
+// credit to https://blog.benoitvallon.com/sorting-algorithms-in-javascript/the-merge-sort-algorithm/
 
-// attempt #2 with iterative merge sort
-function mergeSort(arr) {
-  
+async function mergeSort(array) {
+  var step = 1;
+  while (step < array.length) {
+    var left = 0;
+    while (left + step < array.length) {
+      await merge(array, left, step);
+      left += step * 2;
+    }
+    step *= 2;
+  }
+  return array;
 }
 
-// attemp #1 with recursion, not changing anything
-// async function mergeSort(arr) {
-//     if (arr.length <= 1) return arr;
-//     const midIdx = Math.floor(arr.length / 2);
+async function merge(array, left, step) {
+  let timeout = document.getElementById("sort-speed").value;
+  var right = left + step;
+  var end = Math.min(left + step * 2 - 1, array.length - 1);
+  var leftMoving = left;
+  var rightMoving = right;
+  var temp = [];
+  selected = [];
+  for (var i = left; i <= end; i++) {
+    selected.push(i);
+    if (
+      (array[leftMoving] <= array[rightMoving] || rightMoving > end) &&
+      leftMoving < right
+    ) {
+      temp[i] = array[leftMoving];
+      leftMoving++;
+    } else {
+      temp[i] = array[rightMoving];
+      rightMoving++;
+    }
+    await sleep(1000 / (10 * timeout));
+  }
 
-//     const left = await mergeSort(arr.slice(0, midIdx));
-//     const right = await mergeSort(arr.slice(midIdx));
+  for (var j = left; j <= end; j++) {
+    selected.push(j);
+    array[j] = temp[j];
+    await sleep(1000 / (10 * timeout));
+  }
+}
 
-//     arr = await merge(left, right);
-//     return arr;
-// }
-
-// async function merge(left, right) {
-//     let sorted = [];
-//     while (left.length && right.length) {
-//         if (left[0] < right[0]) {
-//             sorted.push(left.shift());
-//         } else {
-//             sorted.push(right.shift());
-//         }
-//     }
-
-//     return sorted.concat(left, right);
-// }
-
-// quick 
+// quicksort 
 
 async function quickSort(arr, start = 0, end = arr.length - 1) {
   if (start >= end) {
