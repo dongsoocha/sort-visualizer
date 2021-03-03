@@ -9,12 +9,28 @@ var svg = d3
 
 let selected = [];
 
+// BUTTONS
 document.getElementById("array-gen").addEventListener("click", function() {
     length = document.getElementById("array-length").value;
     setup();
 });
+
+
 document.getElementById("bubble").addEventListener("click", function () {
   bubble(renderArray);
+});
+document.getElementById("insertion").addEventListener("click", function () {
+  insertion(renderArray);
+});
+document.getElementById("merge").addEventListener("click", function () {
+  mergeSort(renderArray);
+  console.log(renderArray);
+});
+document.getElementById("quick").addEventListener("click", function () {
+  quickSort(renderArray);
+});
+document.getElementById("selection").addEventListener("click", function () {
+  selection(renderArray);
 });
 
 function setup() {
@@ -49,7 +65,7 @@ function draw() {
     });
 }
 
-
+// bubble
 
 async function bubble(arr) {
   let sorted = false;
@@ -69,6 +85,111 @@ async function bubble(arr) {
   }
   return arr;
 }
+
+// insertion
+
+async function insertion(arr) {
+let timeout = document.getElementById("sort-speed").value;
+  for (let i = 1; i < arr.length; i++) {
+    let j;
+    let temp = arr[i]; // will mutate so need to assign to var
+    for (j = i - 1; j >= 0 && arr[j] > temp; j--) {
+      arr[j + 1] = arr[j];
+      await sleep(500/(10 * timeout));
+    }
+    arr[j + 1] = temp;
+  }
+
+  return arr;
+}
+
+// merge
+
+// attempt #2 with iterative merge sort
+function mergeSort(arr) {
+  
+}
+
+// attemp #1 with recursion, not changing anything
+// async function mergeSort(arr) {
+//     if (arr.length <= 1) return arr;
+//     const midIdx = Math.floor(arr.length / 2);
+
+//     const left = await mergeSort(arr.slice(0, midIdx));
+//     const right = await mergeSort(arr.slice(midIdx));
+
+//     arr = await merge(left, right);
+//     return arr;
+// }
+
+// async function merge(left, right) {
+//     let sorted = [];
+//     while (left.length && right.length) {
+//         if (left[0] < right[0]) {
+//             sorted.push(left.shift());
+//         } else {
+//             sorted.push(right.shift());
+//         }
+//     }
+
+//     return sorted.concat(left, right);
+// }
+
+// quick 
+
+async function quickSort(arr, start = 0, end = arr.length - 1) {
+  if (start >= end) {
+    return;
+  }
+
+  let idx = await partition(arr, start, end);
+
+  await quickSort(arr, start, idx - 1);
+  await quickSort(arr, idx + 1, end);
+  return arr;
+}
+
+async function partition(arr, start, end) {
+    let timeout = document.getElementById("sort-speed").value;
+  // last element as pivot
+  const pivot = arr[end];
+  let pivotIdx = start;
+  for (let i = start; i < end; i++) {
+    if (arr[i] < pivot) {
+      // swap elements
+      [arr[i], arr[pivotIdx]] = [arr[pivotIdx], arr[i]];
+      // move to next ele
+      pivotIdx++;
+      await sleep(1000 / (10 * timeout));
+    }
+  }
+
+  // pivot value in middle
+  [arr[pivotIdx], arr[end]] = [arr[end], arr[pivotIdx]];
+  return pivotIdx;
+}
+
+// selection
+
+async function selection(arr) {
+  // find minimum, put at beginning. reverse bubblesort
+  let timeout = document.getElementById("sort-speed").value;
+  for (let i = 0; i < arr.length - 1; i++) {
+    let min = i;
+
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[j] < arr[min]) {
+        min = j;
+      }
+    }
+    if (min !== i) {
+      [arr[i], arr[min]] = [arr[min], arr[i]];
+        await sleep(1000/(10 * timeout));
+    }
+  }
+  return arr;
+}
+
 
 // credit to user Dan Dascalescu https://stackoverflow.com/questions/951021/what-is-the-javascript-version-of-sleep
 function sleep(ms) {
