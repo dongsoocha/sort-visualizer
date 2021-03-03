@@ -90,9 +90,17 @@ table {
     background-color:rgba(155, 187, 218, 0.7);
     color: white;
 }
+.buttons > button:focus{
+    cursor: pointer;
+    background-color:rgba(155, 187, 218, 0.7);
+    color: white;
+    outline: none;
+}
 
 body {
     margin: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .app {
@@ -100,17 +108,19 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    max-width: 850px;
+    align-self: center;
 }
 .app > .controls {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    width: 35vw;
+    height: 190px;
+    width: 25%;
     border: none;
     border-radius: 3px;
     padding: 5px;
     background-color: rgb(119, 119, 119);
-    color: #cccccc;
+    color: #dadada;
     font-family: SF Pro Text,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif;
     font-size: 12px;
 
@@ -129,9 +139,31 @@ body {
 #array-gen{
     margin-top: 20px;
     align-self: center;
-    width: 170px;
+    width: 140px;
 }
 
 svg {
-    background-color: #eeeeee;
+    background: linear-gradient(#f0f0f0, #b8b8b8);
+}
+#array-length {
+    margin-left: 5px;
+    -webkit-appearance: none;
+    width: 30%;
+    max-width: 70px;
+    height: 3px;
+    border-radius: 5px;  
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+#array-length::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%; 
+    background: white;
+    cursor: pointer;
 }

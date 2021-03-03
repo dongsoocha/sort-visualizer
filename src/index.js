@@ -5,7 +5,7 @@ var svg = d3
   .select(".app")
   .append("svg")
   .attr("height", "200")
-  .attr("width", "300")
+  .attr("width", "400")
   .attr("fill", "#222222");
 
 let selected = [];
@@ -44,7 +44,7 @@ function setup() {
     current = null;
     renderArray = [];
   for (let i = 0; i < length; i++) {
-    renderArray.push(Math.floor(Math.random()*100));
+    renderArray.push(Math.floor(Math.random()* 99 + 1));
   }
 }
 // draw should only be called when new array is generated
@@ -65,7 +65,7 @@ function draw() {
     })
     .attr("width", `${150 / length}`)
     .attr("x", function (d, i) {
-        return 300 / length * (i) + 75 / length;
+        return 400 / length * (i) + 100 / length;
     })
     .attr("y", function (d, i) {
         return 200 - (d * 2);
@@ -196,10 +196,11 @@ async function selection(arr) {
     current = null;
     for (let j = i + 1; j < arr.length; j++) {
         selected.push(j);
+        await sleep(1000/(10 * timeout));
         if (arr[j] < arr[min]) {
-            min = j;
-            current = j;
-            await sleep(1000/(10 * timeout));
+          min = j;
+          current = j;
+          await sleep(1000/(10 * timeout));
       }
     }
     if (min !== i) {
