@@ -1,4 +1,4 @@
-let renderArray;
+let renderArray1;
 let renderArray2;
 // give for value of input array-length
 let length;
@@ -34,44 +34,39 @@ document.getElementById("array-sort").addEventListener("click", function () {
   const sort2 = document.getElementById("sort-2").value;
   switch (sort1) {
     case "bubble":
-      bubble(renderArray, 1);
+      bubble(renderArray1, 1);
+      break;
     case "insertion":
-      insertion(renderArray, 1);
+      insertion(renderArray1, 1);
+      break;
     case "merge":
-      mergeSort(renderArray, 1);
+      mergeSort(renderArray1, 1);
+      break;
     case "quick":
-      quickSort(renderArray, 1);
+      quickSort(renderArray1, 0, length - 1, 1);
+      break;
     case "selection":
-      selection(renderArray, 1);
-  }
+      selection(renderArray1, 1);
+      break;
+  };
   switch (sort2) {
     case "bubble":
       bubble(renderArray2, 2);
+      break;
     case "insertion":
       insertion(renderArray2, 2);
+      break;
     case "merge":
       mergeSort(renderArray2, 2);
+      break;
     case "quick":
-      quickSort(renderArray2, 2);
+      quickSort(renderArray2, 0, length - 1, 1);
+      break;
     case "selection":
       selection(renderArray2, 2);
+      break;
   }
 })
-// document.getElementById("bubble").addEventListener("click", function () {
-//   bubble(renderArray);
-// });
-// document.getElementById("insertion").addEventListener("click", function () {
-//   insertion(renderArray);
-// });
-// document.getElementById("merge").addEventListener("click", function () {
-//   mergeSort(renderArray, 0, length - 1);
-// });
-// document.getElementById("quick").addEventListener("click", function () {
-//   quickSort(renderArray);
-// });
-// document.getElementById("selection").addEventListener("click", function () {
-//   selection(renderArray);
-// });
 
 function setup() {
     // prepare for draw
@@ -81,13 +76,15 @@ function setup() {
     selected2 = [];
     current1 = null;
     current2 = null;
-    renderArray = [];
+    renderArray1 = [];
+    renderArray2 = [];
   for (let i = 0; i < length; i++) {
-    renderArray.push(Math.floor(Math.random()* 99 + 1));
+    let num = Math.floor(Math.random() * 99 + 1);
+    renderArray1.push(num);
+    renderArray2.push(num);
   }
-  renderArray2 = renderArray.map(el => el);
 }
-// draw should only be called when new array is generated
+
 function draw() {
     // reset 
     svg1.selectAll("*").remove();
@@ -95,7 +92,7 @@ function draw() {
 
   svg1
     .selectAll("rect")
-    .data(renderArray)
+    .data(renderArray1)
     .enter()
     .append("rect")
     .attr("fill", function (d, i) {
@@ -116,28 +113,28 @@ function draw() {
         return 200 - (d * 2);
     });
 
-    svg2
-      .selectAll("rect")
-      .data(renderArray2)
-      .enter()
-      .append("rect")
-      .attr("fill", function (d, i) {
-        return current2 === i
-          ? "#EF0096"
-          : selected2.includes(i)
-          ? "#009FFA"
-          : "#777777";
-      })
-      .attr("height", function (d, i) {
-        return d * 2;
-      })
-      .attr("width", `${200 / length}`)
-      .attr("x", function (d, i) {
-        return (400 / length) * i + 100 / length;
-      })
-      .attr("y", function (d, i) {
-        return 200 - d * 2;
-      });
+  svg2
+    .selectAll("rect")
+    .data(renderArray2)
+    .enter()
+    .append("rect")
+    .attr("fill", function (d, i) {
+      return current2 === i
+        ? "#EF0096"
+        : selected2.includes(i)
+        ? "#009FFA"
+        : "#777777";
+    })
+    .attr("height", function (d, i) {
+      return d * 2;
+    })
+    .attr("width", `${200 / length}`)
+    .attr("x", function (d, i) {
+      return (400 / length) * i + 100 / length;
+    })
+    .attr("y", function (d, i) {
+      return 200 - d * 2;
+    });
 }
 
 // bubble
@@ -155,7 +152,7 @@ async function bubble(arr, type) {
           selected1.push(i);
           break
         case 2:
-          // selected2.push(i);
+          selected2.push(i);
       }
         if (arr[i + 1] < arr[i]) {
             // swap
@@ -208,7 +205,7 @@ async function mergeSort(array, type) {
   while (step < array.length) {
     var left = 0;
     while (left + step < array.length) {
-      merge(array, left, step);
+      await merge(array, left, step);
       left += step * 2;
     }
     step *= 2;
@@ -257,8 +254,8 @@ async function quickSort(arr, start = 0, end = arr.length - 1, type) {
 
   let idx = await partition(arr, start, end);
 
-  quickSort(arr, start, idx - 1);
-  quickSort(arr, idx + 1, end);
+  await quickSort(arr, start, idx - 1);
+  await quickSort(arr, idx + 1, end);
   return arr;
 }
 
@@ -276,13 +273,14 @@ async function partition(arr, start, end, type) {
         selected.push(i, pivotIdx);
         current = i;
       // move to next ele
-      pivotIdx++;
-      await sleep(1000 / (10 * timeout));
+        pivotIdx++;
+        await sleep(1000 / (10 * timeout));
     }
   }
-
+  
   // pivot value in middle
   [arr[pivotIdx], arr[end]] = [arr[end], arr[pivotIdx]];
+  await sleep(1000 / (10 * timeout));
   return pivotIdx;
 }
 

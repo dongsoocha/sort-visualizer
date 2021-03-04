@@ -119,7 +119,7 @@ body {
 .app > .controls {
     display: flex;
     flex-direction: column;
-    height: 190px;
+    height: 400px;
     width: 25%;
     border: none;
     border-radius: 3px;
