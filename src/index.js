@@ -2,6 +2,8 @@ let renderArray1;
 let renderArray2;
 // give for value of input array-length
 let length;
+
+// initialize SVG's
 var svg1 = d3
   .select(".svgs")
   .append("svg")
@@ -285,10 +287,18 @@ async function quickSort(arr, start = 0, end = arr.length - 1, type) {
   if (start >= end) {
     return;
   }
+  switch (type) {
+    case 1:
+      selected1 = [];
+  
+      break;
+    case 2:
+      selected2 = [];
+  }
   let idx = await partition(arr, start, end, type);
   
-  await quickSort(arr, start, idx - 1);
-  await quickSort(arr, idx + 1, end);
+  await quickSort(arr, start, idx - 1, type);
+  await quickSort(arr, idx + 1, end, type);
   return arr;
 }
 
@@ -297,33 +307,25 @@ async function partition(arr, start, end, type) {
   // last element as pivot
   const pivot = arr[end];
   let pivotIdx = start;
-  // switch (type) {
-  //   case 1:
-  //     selected1 = [];
-  
-  //     break;
-  //   case 2:
-  //     selected2 = [];
-  // }
   
   for (let i = start; i < end; i++) {
-    // switch (type) {
-    //   case 1:
-    //     selected1.push(i);
-    //     break;
-    //   case 2:
-    //     selected2.push(i);
-    // }
+    switch (type) {
+      case 1:
+        selected1.push(i);
+        break;
+      case 2:
+        selected2.push(i);
+    }
     if (arr[i] < pivot) {
       // swap elements
       [arr[i], arr[pivotIdx]] = [arr[pivotIdx], arr[i]];
-      // switch (type) {
-      //   case 1:
-      //     current1 = i;
-      //     break;
-      //   case 2:
-      //     current2 = i;
-      // }
+      switch (type) {
+        case 1:
+          current1 = i;
+          break;
+        case 2:
+          current2 = i;
+      }
       // move to next ele
         pivotIdx++;
         await sleep(500 / (10 * timeout));
