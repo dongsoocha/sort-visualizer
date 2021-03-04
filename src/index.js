@@ -5,13 +5,13 @@ let length;
 var svg1 = d3
   .select(".svgs")
   .append("svg")
-  .attr("height", "200")
+  .attr("height", "150")
   .attr("width", "400")
   .attr("fill", "#222222");
 var svg2 = d3
   .select(".svgs")
   .append("svg")
-  .attr("height", "200")
+  .attr("height", "150")
   .attr("width", "400")
   .attr("fill", "#222222");
 
@@ -54,9 +54,9 @@ document.getElementById("array-sort").addEventListener("click", function () {
       bubble(renderArray2, 2);
       break;
     case "insertion":
-      insertion(renderArray2, 2);
+      insertion(renderArray2, 2); 
       break;
-    case "merge":
+    case "merge": 
       mergeSort(renderArray2, 2);
       break;
     case "quick":
@@ -103,14 +103,14 @@ function draw() {
           : "#777777";
     })
     .attr("height", function (d, i) {
-        return d * 2;
+        return d * 1.5;
     })
     .attr("width", `${200 / length}`)
     .attr("x", function (d, i) {
         return 400 / length * (i) + 100 / length;
     })
     .attr("y", function (d, i) {
-        return 200 - (d * 2);
+        return 150 - (d * 1.5);
     });
 
   svg2
@@ -133,7 +133,7 @@ function draw() {
       return (400 / length) * i + 100 / length;
     })
     .attr("y", function (d, i) {
-      return 200 - d * 2;
+      return 150 - (d * 1.5);
     });
 }
 
@@ -144,8 +144,13 @@ async function bubble(arr, type) {
   let timeout = document.getElementById("sort-speed").value
   while (!sorted) {
     sorted = true;
-    selected1 = [];
-    selected2 = [];
+    switch (type) {
+      case 1:
+        selected1 = [];
+        break;
+      case 2:
+        selected2 = [];
+    }
     for (let i = 0; i < arr.length - 1; i++) {
       switch(type) {
         case 1:
@@ -168,8 +173,8 @@ async function bubble(arr, type) {
             [arr[i + 1], arr[i]] = [arr[i], arr[i + 1]];
             
             sorted = false;
-            await sleep(1000/(10 * timeout));
-      }
+          }
+          await sleep(500/(10 * timeout));
     }
   }
   return arr;
@@ -186,9 +191,16 @@ let timeout = document.getElementById("sort-speed").value;
     for (j = i - 1; j >= 0 && arr[j] > temp; j--) {
       current = null;
       arr[j + 1] = arr[j];
-      selected.push(j + 1);
-      current = j + 1;
-      await sleep(1000/(10 * timeout));
+      switch(type) {
+        case 1:
+          selected1.push(j + 1);
+          current1 = j + 1;
+          break
+        case 2:
+          selected2.push(j + 1);
+          current2 = j + 1;
+      }
+      await sleep(500/(10 * timeout));
     }
     arr[j + 1] = temp;
   }
@@ -205,7 +217,7 @@ async function mergeSort(array, type) {
   while (step < array.length) {
     var left = 0;
     while (left + step < array.length) {
-      await merge(array, left, step);
+      await merge(array, left, step, type);
       left += step * 2;
     }
     step *= 2;
@@ -220,10 +232,25 @@ async function merge(array, left, step, type) {
   var leftMoving = left;
   var rightMoving = right;
   var temp = [];
-  selected = [];
+  switch (type) {
+    case 1:
+      selected1 = [];
+      current1 = null;
+      break;
+    case 2:
+      selected2 = [];
+      current2 = null;
+  }
   for (var i = left; i <= end; i++) {
-    selected.push(i);
-    current = i;
+    switch (type) {
+      case 1:
+        selected1.push(i);
+        current1 = i;
+        break;
+      case 2:
+        selected2.push(i);
+        current2 = i;
+    }
     if (
       (array[leftMoving] <= array[rightMoving] || rightMoving > end) &&
       leftMoving < right
@@ -234,15 +261,22 @@ async function merge(array, left, step, type) {
       temp[i] = array[rightMoving];
       rightMoving++;
     }
-    // await sleep(1000 / (10 * timeout));
   }
-
+  
   for (var j = left; j <= end; j++) {
-    selected.push(j);
-    current = j;
+    switch (type) {
+      case 1:
+        current1 = j;
+        current1 = j;
+        break;
+      case 2:
+        selected2.push(j);
+        current2 = j;
+    }
     array[j] = temp[j];
-    await sleep(1000 / (10 * timeout));
+    await sleep(500 / (10 * timeout));
   }
+  // await sleep(500 / (10 * timeout));
 }
 
 // quicksort 
@@ -251,36 +285,54 @@ async function quickSort(arr, start = 0, end = arr.length - 1, type) {
   if (start >= end) {
     return;
   }
-
-  let idx = await partition(arr, start, end);
-
+  let idx = await partition(arr, start, end, type);
+  
   await quickSort(arr, start, idx - 1);
   await quickSort(arr, idx + 1, end);
   return arr;
 }
 
 async function partition(arr, start, end, type) {
-    let timeout = document.getElementById("sort-speed").value;
+  let timeout = document.getElementById("sort-speed").value;
   // last element as pivot
   const pivot = arr[end];
   let pivotIdx = start;
-  selected = [];
+  // switch (type) {
+  //   case 1:
+  //     selected1 = [];
+  
+  //     break;
+  //   case 2:
+  //     selected2 = [];
+  // }
+  
   for (let i = start; i < end; i++) {
+    // switch (type) {
+    //   case 1:
+    //     selected1.push(i);
+    //     break;
+    //   case 2:
+    //     selected2.push(i);
+    // }
     if (arr[i] < pivot) {
       // swap elements
       [arr[i], arr[pivotIdx]] = [arr[pivotIdx], arr[i]];
-    //   selected = Array.from(new Array(pivotIdx - i + 1));
-        selected.push(i, pivotIdx);
-        current = i;
+      // switch (type) {
+      //   case 1:
+      //     current1 = i;
+      //     break;
+      //   case 2:
+      //     current2 = i;
+      // }
       // move to next ele
         pivotIdx++;
-        await sleep(1000 / (10 * timeout));
+        await sleep(500 / (10 * timeout));
     }
   }
   
   // pivot value in middle
   [arr[pivotIdx], arr[end]] = [arr[end], arr[pivotIdx]];
-  await sleep(1000 / (10 * timeout));
+  await sleep(500 / (10 * timeout));
   return pivotIdx;
 }
 
@@ -291,15 +343,37 @@ async function selection(arr, type) {
   let timeout = document.getElementById("sort-speed").value;
   for (let i = 0; i < arr.length - 1; i++) {
     let min = i;
-    selected = [];
+    switch (type) {
+      case 1:
+        selected1 = [i];
+
+        break;
+      case 2:
+        selected2 = [i];
+        break;
+    }
     current = null;
     for (let j = i + 1; j < arr.length; j++) {
-        selected.push(j);
-        await sleep(1000/(10 * timeout));
+        switch (type) {
+          case 1:
+            selected1.push(j);
+
+            break;
+          case 2:
+            selected2.push(j);
+        }
+        await sleep(500/(10 * timeout));
         if (arr[j] < arr[min]) {
           min = j;
-          current = j;
-          await sleep(1000/(10 * timeout));
+          switch (type) {
+            case 1:
+              current1 = j;
+
+              break;
+            case 2:
+              current2 = j
+          }
+          await sleep(500/(10 * timeout));
       }
     }
     if (min !== i) {
