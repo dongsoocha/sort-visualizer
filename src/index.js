@@ -35,6 +35,9 @@ let current2;
 
 // add comparisons
 
+// breaker
+let running = false;
+
 // change label for range
 function changeLabel() {
   var arrSize = document.getElementById("array-length").value;
@@ -43,12 +46,17 @@ function changeLabel() {
 }
 
 // BUTTONS
+document.getElementById("stop-sort").addEventListener("click", function() {
+  running = false;
+})
 document.getElementById("array-gen").addEventListener("click", function() {
+  running = false;
     length = document.getElementById("array-length").value;
     setup();
 });
 
 document.getElementById("array-sort").addEventListener("click", function () {
+  running = true;
   const sort1 = document.getElementById("sort-1").value;
   const sort2 = document.getElementById("sort-2").value;
   switch (sort1) {
@@ -175,6 +183,7 @@ async function bubble(arr, type) {
         selected2 = [];
     }
     for (let i = 0; i < arr.length - 1 - counter; i++) {
+      if (!running) return false;
       switch(type) {
         case 1:
           selected1.push(i);
@@ -219,6 +228,7 @@ let timeout = document.getElementById("sort-speed").value;
     let j;
     let temp = arr[i]; // will mutate so need to assign to var
     for (j = i - 1; j >= 0 && arr[j] > temp; j--) {
+      if (!running) return false;
       current = null;
       arr[j + 1] = arr[j];
       switch(type) {
@@ -247,6 +257,7 @@ async function mergeSort(array, type) {
   while (step < array.length) {
     var left = 0;
     while (left + step < array.length) {
+      if (!running) return false;
       await merge(array, left, step, type);
       left += step * 2;
     }
@@ -272,6 +283,7 @@ async function merge(array, left, step, type) {
       current2 = null;
   }
   for (var i = left; i <= end; i++) {
+    if (!running) return false;
     switch (type) {
       case 1:
         selected1.push(i);
@@ -294,6 +306,7 @@ async function merge(array, left, step, type) {
   }
   
   for (var j = left; j <= end; j++) {
+    if (!running) return false;
     switch (type) {
       case 1:
         current1 = j;
@@ -323,6 +336,7 @@ async function quickSort(arr, start = 0, end = arr.length - 1, type) {
     case 2:
       selected2 = [];
   }
+  if (!running) return false;
   let idx = await partition(arr, start, end, type);
   
   await quickSort(arr, start, idx - 1, type);
@@ -344,6 +358,7 @@ async function partition(arr, start, end, type) {
   }
   
   for (let i = start; i < end; i++) {
+    if (!running) return false;
     switch (type) {
       case 1:
         selected1.push(i);
@@ -384,6 +399,7 @@ async function selection(arr, type) {
     }
     current = null;
     for (let j = i + 1; j < arr.length; j++) {
+      if (!running) return false;
         switch (type) {
           case 1:
             selected1.push(j);

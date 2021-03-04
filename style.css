@@ -66,9 +66,9 @@ table {
     display: flex;
     width: 100%;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     height: 60px;
-    max-width: 900px;
+    max-width: 1260px;
 }
 .head-bar > p {
     color: rgb(235, 235, 235);
@@ -90,8 +90,8 @@ table {
     font-family: SF Pro Text,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif;
     font-size: 15px;
     font-weight: 250;
-    padding-top: 14px;
-    padding-bottom: 14px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     border-radius: 3px;
     width: 100%;
     border: 1px solid #a3a3a3;
@@ -269,5 +269,6 @@ input[type="color"] {
 	border: none;
 	width: 70px;
 	height: 24px;
+    box-shadow: 0 0 2px 2px rgb(155, 155, 155);
 }
 
