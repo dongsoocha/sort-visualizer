@@ -8,19 +8,23 @@ let base;
 let selected;
 let compared;
 
+// statistics variables
+let counter1 = 0;
+let counter2 = 0
+
 
 // initialize SVG's
 var svg1 = d3
   .select(".svgs")
   .append("svg")
-  .attr("height", "150")
-  .attr("width", "400")
+  .attr("height", "300")
+  .attr("width", "800")
   .attr("fill", "#222222");
 var svg2 = d3
   .select(".svgs")
   .append("svg")
-  .attr("height", "150")
-  .attr("width", "400")
+  .attr("height", "300")
+  .attr("width", "800")
   .attr("fill", "#222222");
 
 let selected1 = [];
@@ -114,14 +118,14 @@ function draw() {
           : `${base}`;
     })
     .attr("height", function (d, i) {
-        return d * 1.5;
+        return d * 3;
     })
-    .attr("width", `${200 / length}`)
+    .attr("width", `${400 / length}`)
     .attr("x", function (d, i) {
-        return 400 / length * (i) + 100 / length;
+        return 800 / length * (i) + 200 / length;
     })
     .attr("y", function (d, i) {
-        return 150 - (d * 1.5);
+        return 300 - (d * 3);
     });
 
   svg2
@@ -137,14 +141,14 @@ function draw() {
         : `${base}`;
     })
     .attr("height", function (d, i) {
-      return d * 2;
+      return d * 3;
     })
-    .attr("width", `${200 / length}`)
+    .attr("width", `${400 / length}`)
     .attr("x", function (d, i) {
-      return (400 / length) * i + 100 / length;
+      return (800 / length) * i + 200 / length;
     })
     .attr("y", function (d, i) {
-      return 150 - d * 1.5;
+      return 300 - d * 3;
     });
 }
 
@@ -322,6 +326,13 @@ async function partition(arr, start, end, type) {
   // last element as pivot
   const pivot = arr[end];
   let pivotIdx = start;
+  switch (type) {
+      case 1:
+        current1 = pivotIdx;
+        break;
+      case 2:
+        current2 = pivotIdx;
+  }
   
   for (let i = start; i < end; i++) {
     switch (type) {
@@ -334,13 +345,6 @@ async function partition(arr, start, end, type) {
     if (arr[i] < pivot) {
       // swap elements
       [arr[i], arr[pivotIdx]] = [arr[pivotIdx], arr[i]];
-      switch (type) {
-        case 1:
-          current1 = i;
-          break;
-        case 2:
-          current2 = i;
-      }
       // move to next ele
         pivotIdx++;
         await sleep(500 / (10 * timeout));
