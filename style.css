@@ -68,7 +68,7 @@ table {
     align-items: center;
     justify-content: space-between;
     height: 20px;
-    max-width: 850px;
+    max-width: 600px;
 }
 .head-bar > p {
     margin-left: 30px;
@@ -85,7 +85,7 @@ body {
     padding-top: 25px;
     display: flex;
     flex-direction: row;
-    max-width: 850px;
+    max-width: 600px;
     align-self: center;
     justify-content: space-around;
 }
@@ -110,22 +110,21 @@ body {
     align-items: center;
 }
 .speed-control {
-    padding-top: 20px;
+    padding-top: 10px;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 #array-gen{
-    margin-top: 20px;
+    margin-top: 10px;
     align-self: center;
     width: 140px;
 }
 .svgs {
     max-width: 400px;
+    background: linear-gradient(to bottom, #ffffff, #afabab85, #ffffff);
 }
-svg {
-    background: linear-gradient(#f0f0f0, #b8b8b8);
-}
+
 #array-length {
     margin-left: 5px;
     -webkit-appearance: none;
@@ -147,4 +146,11 @@ svg {
     border-radius: 50%; 
     background: white;
     cursor: pointer;
+}
+ul {
+    padding-top: 10px;
+}
+li {
+    display: flex;
+    justify-content: space-between;
 }
