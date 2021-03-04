@@ -164,6 +164,7 @@ function draw() {
 async function bubble(arr, type) {
   let sorted = false;
   let timeout = document.getElementById("sort-speed").value
+  let counter = 0;
   while (!sorted) {
     sorted = true;
     switch (type) {
@@ -173,7 +174,7 @@ async function bubble(arr, type) {
       case 2:
         selected2 = [];
     }
-    for (let i = 0; i < arr.length - 1; i++) {
+    for (let i = 0; i < arr.length - 1 - counter; i++) {
       switch(type) {
         case 1:
           selected1.push(i);
@@ -181,8 +182,8 @@ async function bubble(arr, type) {
         case 2:
           selected2.push(i);
       }
-        if (arr[i + 1] < arr[i]) {
-            // swap
+      if (arr[i + 1] < arr[i]) {
+        // swap
             switch(type) {
               case 1:
                 current1 = i + 1;
@@ -197,7 +198,8 @@ async function bubble(arr, type) {
             sorted = false;
           }
           await sleep(500/(10 * timeout));
-    }
+        }
+        counter++;
   }
   return arr;
 }
