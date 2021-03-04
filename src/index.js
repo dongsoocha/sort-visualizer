@@ -17,13 +17,13 @@ let counter2 = 0
 var svg1 = d3
   .select(".svgs")
   .append("svg")
-  .attr("height", "300")
+  .attr("height", "250")
   .attr("width", "800")
   .attr("fill", "#222222");
 var svg2 = d3
   .select(".svgs")
   .append("svg")
-  .attr("height", "300")
+  .attr("height", "270")
   .attr("width", "800")
   .attr("fill", "#222222");
 
@@ -34,6 +34,13 @@ let current1;
 let current2;
 
 // add comparisons
+
+// change label for range
+function changeLabel() {
+  var arrSize = document.getElementById("array-length").value;
+  document.getElementById("input-disp").innerHTML = arrSize;
+  
+}
 
 // BUTTONS
 document.getElementById("array-gen").addEventListener("click", function() {
@@ -118,14 +125,14 @@ function draw() {
           : `${base}`;
     })
     .attr("height", function (d, i) {
-        return d * 3;
+        return d * 2.5;
     })
     .attr("width", `${400 / length}`)
     .attr("x", function (d, i) {
         return 800 / length * (i) + 200 / length;
     })
     .attr("y", function (d, i) {
-        return 300 - (d * 3);
+        return 250 - (d * 2.5);
     });
 
   svg2
@@ -141,14 +148,14 @@ function draw() {
         : `${base}`;
     })
     .attr("height", function (d, i) {
-      return d * 3;
+      return d * 2.5;
     })
     .attr("width", `${400 / length}`)
     .attr("x", function (d, i) {
       return (800 / length) * i + 200 / length;
     })
     .attr("y", function (d, i) {
-      return 300 - d * 3;
+      return 20;
     });
 }
 

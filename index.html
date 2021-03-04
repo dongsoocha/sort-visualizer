@@ -16,9 +16,16 @@
         <div class="head-bar">
             <p>Visualize Sorts </p> 
             <div class="size-control">
-                <p>Array Size: 10</p>
-                <input id="array-length" type="range" min=10 max=400 step=5 value=30>
-                <p>400</p>
+                <p>Array Size</p>
+                <label id="input-disp">30</label>
+                <div class="range-slide">
+                    <label>+/- 5</label>
+                    <div class="slide">
+                        <p>-</p>
+                        <input oninput="changeLabel()" id="array-length" type="range" min=10 max=400 step=5 value=30>
+                        <p>+</p>
+                    </div>
+                </div>
             </div>
             <div class="speed-control">
                 <p>Speed: </p>
@@ -35,24 +42,26 @@
     </div>
     <div class="app">
         <div class="controls">
-            <label>First Sort</label>
-            <select name="sort1" id="sort-1">
-                <option value="bubble" selected>Bubble</option>
-                <option value="insertion">Insertion</option>
-                <option value="merge">Merge</option>
-                <option value="quick">Quick</option>
-                <option value="selection">Selection</option>
-            </select>
-            <label>Second Sort</label>
-            <select name="sort-2" id="sort-2">
-                <option value="---" selected disabled>--Choose an option--</option>
-                <option value="bubble">Bubble</option>
-                <option value="insertion">Insertion</option>
-                <option value="merge">Merge</option>
-                <option value="quick">Quick</option>
-                <option value="selection">Selection</option>
-            </select>
-            <button id="array-sort">Sort!</button>
+            <div class="sort-controls"> 
+                <label>First Sort</label>
+                <select name="sort1" id="sort-1">
+                    <option value="bubble" selected>Bubble</option>
+                    <option value="insertion">Insertion</option>
+                    <option value="merge">Merge</option>
+                    <option value="quick">Quick</option>
+                    <option value="selection">Selection</option>
+                </select>
+                <label>Second Sort</label>
+                <select name="sort-2" id="sort-2">
+                    <option value="---" selected disabled>--Choose an option--</option>
+                    <option value="bubble">Bubble</option>
+                    <option value="insertion">Insertion</option>
+                    <option value="merge">Merge</option>
+                    <option value="quick">Quick</option>
+                    <option value="selection">Selection</option>
+                </select>
+                <button id="array-sort">Sort!</button>
+            </div>
             <div class="color-settings">
                 <ul class="colors">
                     <li>
