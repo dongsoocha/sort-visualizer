@@ -3,6 +3,12 @@ let renderArray2;
 // give for value of input array-length
 let length;
 
+// color values
+let base;
+let selected;
+let compared;
+
+
 // initialize SVG's
 var svg1 = d3
   .select(".svgs")
@@ -62,7 +68,7 @@ document.getElementById("array-sort").addEventListener("click", function () {
       mergeSort(renderArray2, 2);
       break;
     case "quick":
-      quickSort(renderArray2, 0, length - 1, 1);
+      quickSort(renderArray2, 0, length - 1, 2);
       break;
     case "selection":
       selection(renderArray2, 2);
@@ -89,6 +95,9 @@ function setup() {
 
 function draw() {
     // reset 
+    base = document.getElementById("base").value;
+    selected = document.getElementById("selected").value;
+    compared = document.getElementById("compared").value;
     svg1.selectAll("*").remove();
     svg2.selectAll("*").remove();
 
@@ -99,10 +108,10 @@ function draw() {
     .append("rect")
     .attr("fill", function (d, i) {
         return current1 === i
-          ? "#EF0096"
+          ? `${selected}`
           : selected1.includes(i)
-          ? "#009FFA"
-          : "#777777";
+          ? `${compared}`
+          : `${base}`;
     })
     .attr("height", function (d, i) {
         return d * 1.5;
@@ -122,10 +131,10 @@ function draw() {
     .append("rect")
     .attr("fill", function (d, i) {
       return current2 === i
-        ? "#EF0096"
+        ? `${selected}`
         : selected2.includes(i)
-        ? "#009FFA"
-        : "#777777";
+        ? `${compared}`
+        : `${base}`;
     })
     .attr("height", function (d, i) {
       return d * 2;
