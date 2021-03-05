@@ -696,13 +696,14 @@ li {
     color: rgb(115, 176, 255);
     appearance: none;
     outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #modal-button > i {
     font-size: 26px;
     font-weight: 400;
-    margin-left: -3.6px;
-    margin-top: 0.8px;
 }
 #modal-button:hover {
     color: rgb(255, 115, 115);
