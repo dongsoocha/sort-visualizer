@@ -9,6 +9,7 @@
         <script src="https://cdn.jsdelivr.net/npm/p5@1.2.0/lib/addons/p5.sound.min.js"></script>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
     </head>
 
 <body>
@@ -45,6 +46,7 @@
             <div class="sort-controls"> 
                 <label>First Sort</label>
                 <select name="sort1" id="sort-1">
+                    <option value="---">None</option>
                     <option value="bubble" selected>Bubble</option>
                     <option value="insertion">Insertion</option>
                     <option value="merge">Merge</option>
@@ -53,18 +55,21 @@
                 </select>
                 <label>Second Sort</label>
                 <select name="sort-2" id="sort-2">
-                    <option value="---" selected disabled>--Choose an option--</option>
+                    <option value="---" selected>None</option>
                     <option value="bubble">Bubble</option>
                     <option value="insertion">Insertion</option>
                     <option value="merge">Merge</option>
                     <option value="quick">Quick</option>
                     <option value="selection">Selection</option>
                 </select>
-                <div>
-                    <button id="array-sort">Sort!</button>
+                <div class="sort-background">
+                    <button id="array-sort"><i class="fas fa-play"></i></button>
                 </div>
-                <div>
-                    <button id="stop-sort">Stop sort!</button>
+                <div class="stop-warning">
+                    <div class="stop-background">
+                        <button id="stop-sort"><i class="fas fa-stop"></i></button>
+                    </div>
+                    <i class="fas fa-exclamation-triangle"><p> Stopping the sort will reset the entire algorithm. Use at your own risk!</p></i>
                 </div>
             </div>
             <div class="color-settings">

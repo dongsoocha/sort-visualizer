@@ -351,10 +351,10 @@ async function partition(arr, start, end, type) {
   let pivotIdx = start;
   switch (type) {
       case 1:
-        current1 = pivotIdx;
+        current1 = end;
         break;
       case 2:
-        current2 = pivotIdx;
+        current2 = end;
   }
   
   for (let i = start; i < end; i++) {

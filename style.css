@@ -106,6 +106,7 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
+    background: linear-gradient(to bottom,#bdbdbdb8, #ffffff, #bdbdbdb8);
 }
 
 .app {
@@ -115,6 +116,7 @@ body {
     width: 1200px;
     align-self: center;
     justify-content: space-around;
+    
 }
 .app > .controls {
     display: flex;
@@ -194,7 +196,7 @@ body {
 .svgs {
     max-width: 800px;
     height: 100%;
-    background: linear-gradient(to bottom, #ffffff, #bdbdbdb8, #ffffff);
+    background: transparent;
 }
 .range-slide {
     margin-left: 20px;
@@ -261,6 +263,11 @@ li {
     justify-content: space-between;
 }
 
+/* unique button styling, similar to emergency stop button */
+
+
+
+
 
 
 /* color selector */
@@ -269,6 +276,73 @@ input[type="color"] {
 	border: none;
 	width: 70px;
 	height: 24px;
-    box-shadow: 0 0 2px 2px rgb(155, 155, 155);
+    box-shadow: 0 0 4px 4px rgb(157, 200, 255);
 }
 
+.sort-controls > .sort-background {
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: solid 3px rgba(0, 0, 0, 0.276);
+    background: rgb(108, 108, 108);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 4px 4px rgba(157, 200, 255, 0.500);
+}
+.stop-warning{
+    margin-top: 10px;
+}
+
+.stop-warning > i {
+    padding-top: 20px;
+    display: flex;
+    flex-wrap: initial;
+    padding-left: 20px;
+    font-size: 18px;
+}
+
+.sort-controls > .stop-warning > .stop-background {
+    margin-left: 9px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgb(108, 108, 108);
+    border: solid 3px rgba(0, 0, 0, 0.276);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 4px 4px rgba(157, 200, 255, 0.500);
+}
+
+#array-sort {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0 0 2px 2px rgb(77, 77, 77);
+    background: radial-gradient(circle at center, rgb(134, 255, 127), rgb(13, 177, 13) 100%);
+    outline: none;
+    appearance: none;
+}
+
+#array-sort:hover {
+    background:rgb(134, 255, 127)
+}
+
+#stop-sort {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0 0 2px 2px rgb(77, 77, 77);
+    background: radial-gradient(circle at center, rgb(255, 144, 144), rgb(206, 57, 57) 100%);
+    outline: none;
+    appearance: none;
+}
+
+#stop-sort:hover {
+    background:rgb(255, 144, 144)
+}
