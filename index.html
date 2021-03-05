@@ -16,29 +16,30 @@
     <div class="bar-background">
         <div class="head-bar">
             <p>Visualize Sorts </p> 
-            <div class="size-control">
-                <p>Array Size</p>
-                <label id="input-disp">30</label>
-                <div class="range-slide">
-                    <label>+/- 5</label>
-                    <div class="slide">
-                        <p>-</p>
-                        <input oninput="changeLabel()" id="array-length" type="range" min=10 max=400 step=5 value=30>
-                        <p>+</p>
+            <div class="array-controls">
+                <div class="size-control">
+                    <p>Array Size:</p>
+                    <label id="input-disp">30</label>
+                    <div class="range-slide">
+                        <div class="slide">
+                            <p>-</p>
+                            <input oninput="changeLabel()" id="array-length" type="range" min=10 max=400 step=5 value=30>
+                            <p>+</p>
+                        </div>
                     </div>
                 </div>
+                <div class="speed-control">
+                    <p>Speed: </p>
+                    <select name="speed" id="sort-speed">
+                        <option value="1">1</option>
+                        <option value="4">2</option>
+                        <option value="6">3</option>
+                        <option value="8">4</option>
+                        <option value="10" selected>5</option>
+                    </select>
+                </div>
+                <button id="array-gen">Generate new array!</button>
             </div>
-            <div class="speed-control">
-                <p>Speed: </p>
-                <select name="speed" id="sort-speed">
-                    <option value="1">1</option>
-                    <option value="4">2</option>
-                    <option value="6">3</option>
-                    <option value="8">4</option>
-                    <option value="10" selected>5</option>
-                </select>
-            </div>
-            <button id="array-gen">Generate new array!</button>
         </div>
     </div>
     <div class="app">
@@ -93,7 +94,11 @@
                     </li>
                 </ul>
             </div>
-
+            <div class="links">
+                <a href="https://www.linkedin.com/in/dongsoo-cha-72511476/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/chubbibanana/" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://angel.co/u/dongsoo-cha" target="_blank"><i class="fab fa-angellist"></i></a>
+            </div>
         </div>
         <div class="svgs">
 
