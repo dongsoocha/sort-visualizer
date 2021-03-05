@@ -1,3 +1,5 @@
+# Visualize Sorts
+
 ![Demo](https://github.com/Chubbibanana/sort-visualizer/blob/main/assets/demosort.gif)
 
 [Go to live site!](https://chubbibanana.github.io/sort-visualizer/)
