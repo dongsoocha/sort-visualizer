@@ -411,6 +411,9 @@ input[type="color"] {
 
   /* box-shadow: 0 0  4px 4px rgb(157, 200, 255); */
 }
+input[type="color"]:hover {
+    box-shadow: 0 0 5px 5px rgb(157, 200, 255);
+}
 
 .color-settings {
   margin-top: 15px;
@@ -501,13 +504,13 @@ li {
 .sort-buttons {
   width: 250px;
   margin-top: 10px;
-  padding-top: 10px;
   border-radius: 55px;
   border: solid 4px rgb(48, 48, 48);
   background: rgb(68, 68, 68);
   display: flex;
   justify-content: space-around;
-  padding-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   box-shadow: 0 0 5px 5px rgba(157, 200, 255, 0.5);
 }
 .sort-buttons > .stop-background {
@@ -583,7 +586,7 @@ li {
 .links {
   align-self: center;
 
-  margin-top: 20px;
+  margin-top: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   background: rgb(68, 68, 68);
@@ -708,4 +711,8 @@ li {
 #modal-button:hover {
     color: rgb(255, 115, 115);
     box-shadow: 0 0 4px 2px rgb(255, 157, 157);
+}
+#modal-button:active {
+    color: rgb(252, 31, 31);
+    box-shadow: 0 0 4px 2px rgb(255, 81, 81);
 }
