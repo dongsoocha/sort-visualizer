@@ -106,7 +106,7 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(to bottom,#bdbdbdb8, #ffffff, #bdbdbdb8);
+    background: linear-gradient(to bottom,#242424, #484848, #242424);
 }
 
 .app {
@@ -121,23 +121,30 @@ body {
 .app > .controls {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     height: 594px;
     width: 25%;
     border: none;
-    border-radius: 3px;
+    border-radius: 10px;
+    border: solid 3px #2b2b2b;
     padding: 5px;
-    background-color: rgb(181, 181, 181);
-    color: #6f6f6f;
+    background-color: rgb(94, 94, 94);
+    color: #e2e2e2;
     font-family: SF Pro Text,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif;
     font-size: 24px;
-    text-shadow: 0px 1px 0px rgba(255,255,255,.5); /* 50% white from bottom */
+    font-weight: 400;
+    /* text-shadow: 0 0 20px rgba(157, 200, 255, 0.500); 50% white from bottom */
+    text-shadow: 0 0 5px #67bdff; /* 50% white from bottom */
 }
 
 .sort-controls {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
 }
+
+
+
 .size-control {
     border: 1px solid #a3a3a3;
     display: flex;
@@ -214,7 +221,7 @@ body {
 .range-slide > label {
     color: #c7c7c7;
     font-weight: 500;
-    padding-bottom: 3px;
+    padding-bottom: 1px;
 }
 
 .slide {
@@ -227,6 +234,7 @@ body {
     font-size: 12px;
 }
 #array-length {
+    margin-bottom: 0px;
     margin-left: 5px;
     -webkit-appearance: none;
     width: 150px;
@@ -236,6 +244,7 @@ body {
     outline: none;
     -webkit-transition: .2s;
     transition: opacity .2s;
+    box-shadow: 0 0 2px 2px rgb(174, 208, 252);
 }
 
 #array-length:active {
@@ -252,15 +261,12 @@ body {
     border: 4px solid #3c3c3c;
 }
 #array-length::-webkit-slider-thumb:hover {
+    background: #616161;
+    border: none;
+}
+#array-length::-webkit-slider-thumb:active {
     background: #3c3c3c;
     border: 4px solid rgb(157, 200, 255);
-}
-ul {
-    padding-top: 10px;
-}
-li {
-    display: flex;
-    justify-content: space-between;
 }
 
 /* unique button styling, similar to emergency stop button */
@@ -272,25 +278,44 @@ li {
 
 /* color selector */
 input[type="color"] {
-	-webkit-appearance: none;
+    -webkit-appearance: none;
 	border: none;
 	width: 70px;
 	height: 24px;
-    box-shadow: 0 0 4px 4px rgb(157, 200, 255);
+    background: #444444;
+    
+    /* box-shadow: 0 0  4px 4px rgb(157, 200, 255); */
 }
 
-.sort-controls > .sort-background {
+.color-settings {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+ul {
+    padding-top: 10px;
+}
+li {
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+    padding-bottom: 10px;
+}
+
+.sort-buttons > .sort-background {
     margin-top: 10px;
-    margin-left: 10px;
+    
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    border: solid 3px rgba(0, 0, 0, 0.276);
-    background: rgb(108, 108, 108);
+    border: solid 3px rgba(16, 72, 0, 0.276);
+    background: rgb(37, 147, 0);
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 4px 4px rgba(157, 200, 255, 0.500);
+    box-shadow: 0 0 5px 5px rgba(157, 200, 255, 0.500);
 }
 .stop-warning{
     margin-top: 10px;
@@ -301,20 +326,77 @@ input[type="color"] {
     display: flex;
     flex-wrap: initial;
     padding-left: 20px;
-    font-size: 18px;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+    color: rgb(255, 74, 74);
+}
+.warning {
+    margin-top: 20px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center
+}
+.warning > i {
+    margin-right: 8px;
+    color:rgb(255, 127, 127);
+}
+.warning > p {
+    width: 70%;
+    margin-left: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 16px;
+    background:rgb(225, 225, 225);
+    border-radius: 7px;
+    color:rgb(255, 127, 127);
+    box-shadow: 0 0 4px 4px rgba(255, 157, 157, 0.5);
+    text-shadow: none;
 }
 
-.sort-controls > .stop-warning > .stop-background {
-    margin-left: 9px;
+.sort-controls select{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100px;
+    /* box-shadow: 0 0 4px 4px rgb(157, 200, 255); */
+    border: solid 2px #222222;
+    font-size: 16px;
+    font-family: SF Pro Text,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-weight: 500;
+    border-radius: 5px;
+    outline: none;
+    text-align: center;
+    color: rgb(157, 200, 255);
+    background: #444444;
+}
+
+.sort-buttons {
+    width: 250px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-radius: 60px;
+    border: solid 4px rgb(48, 48, 48);
+    background:rgb(68, 68, 68);
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 10px;
+    box-shadow: 0 0 5px 5px rgba(157, 200, 255, 0.500);
+}
+.sort-buttons > .stop-background {
+    margin-top: 10px;
+    margin-bottom: 10px;
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: rgb(108, 108, 108);
+    background: rgb(201, 0, 0);
     border: solid 3px rgba(0, 0, 0, 0.276);
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 4px 4px rgba(157, 200, 255, 0.500);
+    box-shadow: 0 0 5px 5px rgba(157, 200, 255, 0.500);
 }
 
 #array-sort {
@@ -323,7 +405,7 @@ input[type="color"] {
     border-radius: 50%;
     border: none;
     box-shadow: 0 0 2px 2px rgb(77, 77, 77);
-    background: radial-gradient(circle at center, rgb(134, 255, 127), rgb(13, 177, 13) 100%);
+    background: radial-gradient(circle at center, rgb(8, 162, 0), rgb(13, 177, 13) 100%);
     outline: none;
     appearance: none;
 }
@@ -338,11 +420,11 @@ input[type="color"] {
     border-radius: 50%;
     border: none;
     box-shadow: 0 0 2px 2px rgb(77, 77, 77);
-    background: radial-gradient(circle at center, rgb(255, 144, 144), rgb(206, 57, 57) 100%);
+    background: radial-gradient(circle at center, rgb(254, 97, 97), rgb(157, 0, 0) 100%);
     outline: none;
     appearance: none;
 }
 
 #stop-sort:hover {
-    background:rgb(255, 144, 144)
+    background:rgb(255, 113, 113);
 }

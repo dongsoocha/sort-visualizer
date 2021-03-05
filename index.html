@@ -44,7 +44,7 @@
     <div class="app">
         <div class="controls">
             <div class="sort-controls"> 
-                <label>First Sort</label>
+                <label>Sort 1</label>
                 <select name="sort1" id="sort-1">
                     <option value="---">None</option>
                     <option value="bubble" selected>Bubble</option>
@@ -53,7 +53,7 @@
                     <option value="quick">Quick</option>
                     <option value="selection">Selection</option>
                 </select>
-                <label>Second Sort</label>
+                <label>Sort 2</label>
                 <select name="sort-2" id="sort-2">
                     <option value="---" selected>None</option>
                     <option value="bubble">Bubble</option>
@@ -62,21 +62,26 @@
                     <option value="quick">Quick</option>
                     <option value="selection">Selection</option>
                 </select>
-                <div class="sort-background">
-                    <button id="array-sort"><i class="fas fa-play"></i></button>
-                </div>
-                <div class="stop-warning">
+                <div class="sort-buttons">
+                    <div class="sort-background">
+                        <button id="array-sort"><i class="fas fa-play"></i></button>
+                    </div>
+                
                     <div class="stop-background">
                         <button id="stop-sort"><i class="fas fa-stop"></i></button>
                     </div>
-                    <i class="fas fa-exclamation-triangle"><p> Stopping the sort will reset the entire algorithm. Use at your own risk!</p></i>
                 </div>
+                <div class = 'warning'>
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p> Stopping the sort will reset the entire algorithm. Use at your own risk!</p>
+                </div>  
             </div>
             <div class="color-settings">
+                <p>Color Selectors</p>
                 <ul class="colors">
                     <li>
                         <label>Base </label>
-                        <input type="color" value="#777777" id="base">
+                        <input type="color" value="#44AA99" id="base">
                     </li>
                     <li>
                         <label>Selected </label>
@@ -84,7 +89,7 @@
                     </li>
                     <li>
                         <label>Compared </label>
-                        <input type="color" value="#009FFA" id="compared">
+                        <input type="color" value="#FFC20A" id="compared">
                     </li>
                 </ul>
             </div>
