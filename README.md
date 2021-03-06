@@ -3,6 +3,7 @@
 ![Demo](https://github.com/Chubbibanana/sort-visualizer/blob/main/assets/demosort.gif)
 
 [Go to live site!](https://chubbibanana.github.io/sort-visualizer/)
+<a href="https://chubbibanana.github.io/sort-visualizer/" target="_blank">Go to live site!</a>
 
 ## Instructions
 
