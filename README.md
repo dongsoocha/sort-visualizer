@@ -1,8 +1,8 @@
 # Visualize Sorts
 
-![Demo](https://github.com/Chubbibanana/sort-visualizer/blob/main/assets/demosort.gif)
+![Demo](https://github.com/dongsoocha/sort-visualizer/blob/main/assets/demosort.gif)
 
-[Go to live site!](https://chubbibanana.github.io/sort-visualizer/)
+[Go to live site!](https://dongsoocha.github.io/sort-visualizer/)
 
 ## Instructions
 
